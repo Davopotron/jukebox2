@@ -1,10 +1,26 @@
 const express = require("express");
 const router = express.Router();
+module.exports = router;
 
 const prisma = require("../prisma");
 
 router.get("/", async (req, res, next) => {
-    next()
+    try {
+        const tracks = await prisma.track.findMany();
+        res.json(tracks);
+    } catch (e) {
+        next(e);
+    }
     });
 
-module.exports = router;
+router.get("/:id", async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const track = await prisma.track.findUniqueOrThrow({ where: { id: +id } });
+        res.json(track);
+    } catch (e) {
+        next(e);
+    }
+    });
+
+
