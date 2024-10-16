@@ -1,10 +1,16 @@
 const express = require("express");
 const router = express.Router();
+module.exports = router;
 
 const prisma = require("../prisma");
 
 router.get("/", async (req, res, next) => {
-    next()
+    try {
+        const users = await prisma.user.findMany();
+        res.json(users);
+    } catch(e) {
+        next(e);
+    }
 });
 
-module.exports = router;
+
