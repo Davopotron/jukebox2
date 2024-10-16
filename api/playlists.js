@@ -14,11 +14,13 @@ router.get("/", async (req, res, next) => {
     });
 
 router.post("/", async (req, res, next) => {
+    console.log("req.body", req.body)
     const { name, description, ownerId, trackIds } = req.body;
-    const tracks = tracksIds.map((id) => ({ id: +id }));
+    const tracks = trackIds.map((id) => ({ id: +id }));
     try {
+        // this is creating a sql query that inserts a row on the playlist table
         const playlist = await prisma.playlist.create({
-            data: {
+            data: { // rows are defined on this data property
                 name, 
                 description,
                 ownerId: +ownerId,

@@ -4,16 +4,15 @@ const { faker } = require("@faker-js/faker");
 const seed = async ( 
     numUsers = 5, 
     numPlaylists = 10,
-    numTrack = 20
+    numTracks = 20
 ) => {
   const users = Array.from({ length: numUsers }, () => ({
     username: faker.internet.displayName(),
   }));
   await prisma.user.createMany({ data: users });
 
-  const tracks = Array.from({ length: numTracks }, () => ({
-    name: faker.music.songName(),
-    playlists: `track${i + 1}@foo.bar`,
+  const tracks = Array.from({ length: numTracks }, (e, i) => ({
+    name: faker.music.songName()
   }));
   await prisma.track.createMany({ data: tracks });  
 
