@@ -18,5 +18,12 @@ Table Track {
   playlists Playlist[]
 }
 
+//<: mouth opens toward the "many"
+
+//Ref: User.playlists < Playlist.owner
+
+//1 User has many Playlists
+//the connecting fields are playlists and owner, respectively//
+
 Ref: User.playlists < Playlist.owner
 Ref: Playlist.tracks <> Track.playlists

@@ -40,7 +40,7 @@ router.post("/", async (req, res, next) => {
     router.get("/:id", async (req, res, next) => {
         const { id } =req.params;
         try {
-            const playlist = await prisma.playlist.findUniqueorThrow({
+            const playlist = await prisma.playlist.findUniqueOrThrow({
                 where: { id: +id },
                 include: { tracks: true },
             });
